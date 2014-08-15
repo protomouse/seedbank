@@ -20,30 +20,30 @@ Example
 Seedbank seeds follow this structure;
 
     db/seeds/
-      bar.seeds.rb
+      bar.rb
       development/
-        users.seeds.rb
-      foo.seeds.rb
+        users.rb
+      foo.rb
 
 This would generate the following Rake tasks
 
-    rake db:seed                    # Load the seed data from db/seeds.rb, db/seeds/*.seeds.rb and db/seeds/ENVIRONMENT/*.seeds.rb. ENVIRONMENT is the current environment in Rails.env.
-    rake db:seed:bar                # Load the seed data from db/seeds/bar.seeds.rb
-    rake db:seed:common             # Load the seed data from db/seeds.rb and db/seeds/*.seeds.rb.
-    rake db:seed:development        # Load the seed data from db/seeds.rb, db/seeds/*.seeds.rb and db/seeds/development/*.seeds.rb.
-    rake db:seed:development:users  # Load the seed data from db/seeds/development/users.seeds.rb
-    rake db:seed:foo                # Load the seed data from db/seeds/foo.seeds.rb
+    rake db:seed                    # Load the seed data from db/seeds.rb, db/seeds/*.rb and db/seeds/ENVIRONMENT/*.rb. ENVIRONMENT is the current environment in Rails.env.
+    rake db:seed:bar                # Load the seed data from db/seeds/bar.rb
+    rake db:seed:common             # Load the seed data from db/seeds.rb and db/seeds/*.rb.
+    rake db:seed:development        # Load the seed data from db/seeds.rb, db/seeds/*.rb and db/seeds/development/*.rb.
+    rake db:seed:development:users  # Load the seed data from db/seeds/development/users.rb
+    rake db:seed:foo                # Load the seed data from db/seeds/foo.rb
     rake db:seed:original           # Load the seed data from db/seeds.rb
 
 Therefore, assuming `RAILS_ENV` is not set or it is "development":
 
     $ rake db:seed
 
-will load the seeds in `db/seeds.rb`, `db/seeds/bar.seeds.rb`, `db/seeds/foo.seeds.rb` and `db/seeds/development/users.seeds.rb`. Whereas, setting the `RAILS_ENV` variable, like so:
+will load the seeds in `db/seeds.rb`, `db/seeds/bar.rb`, `db/seeds/foo.rb` and `db/seeds/development/users.rb`. Whereas, setting the `RAILS_ENV` variable, like so:
 
     $ RAILS_ENV=production db:seed
 
-will load the seeds in `db/seeds.rb`, `db/seeds/bar.seeds.rb` and `db/seeds/foo.seeds.rb`.
+will load the seeds in `db/seeds.rb`, `db/seeds/bar.rb` and `db/seeds/foo.rb`.
 
 Installation
 ============
@@ -86,9 +86,9 @@ If you vendor the gem you'll need to change the require to the specific path.
 Usage
 =====
 
-Seeds files are just plain old Ruby executed in your rails application environment so anything you could type into the rails console will work in your seeds. Seeds files have to be named with the '.seeds.rb' extension.
+Seeds files are just plain old Ruby executed in your rails application environment so anything you could type into the rails console will work in your seeds.
 
-db/seeds/companies.seeds.rb
+db/seeds/companies.rb
 ```ruby
 Company.find_or_create_by_name('Hatch', :url => 'http://thisishatch.co.uk' )
 ```
@@ -96,7 +96,7 @@ Company.find_or_create_by_name('Hatch', :url => 'http://thisishatch.co.uk' )
 The seed files under db/seeds are run first in alphanumeric order followed by the ones in the db/seeds/RAILS_ENV. You can add dependencies to your seed files
 to enforce the run order. for example;
 
-db/seeds/users.seeds.rb
+db/seeds/users.rb
 ```ruby
 after :companies do
   company = Company.find_by_name('Hatch')
@@ -104,7 +104,7 @@ after :companies do
 end
 ```
 
-db/seeds/projects.seeds.rb
+db/seeds/projects.rb
 ```ruby
 after :companies do
   company = Company.find_by_name('Hatch')
@@ -112,7 +112,7 @@ after :companies do
 end
 ```
 
-db/seeds/tasks.seeds.rb
+db/seeds/tasks.rb
 ```ruby
 after :projects, :users do
   project = Project.find_by_name('Seedbank')
@@ -123,7 +123,7 @@ end
 
 If the dependencies are in one of the environment folders, you need to namespace the parent task:
 
-db/seeds/development/users.seeds.rb
+db/seeds/development/users.rb
 ```ruby
 after "development:companies" do
   company = Company.find_by_name('Hatch')

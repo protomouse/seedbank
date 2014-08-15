@@ -10,7 +10,7 @@ module Seedbank
 
     def seed_task_from_file(seed_file)
       scopes  = scope_from_seed_file(seed_file)
-      fq_name = scopes.push(File.basename(seed_file, '.seeds.rb')).join(':')
+      fq_name = scopes.push(File.basename(seed_file, '.rb')).join(':')
 
       define_seed_task(seed_file, fq_name)
     end
